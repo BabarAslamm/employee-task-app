@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\EmployeeRoleOrganization;
+use App\Models\Organization;
+use App\Models\Role;
+use App\Models\RoleOrganization;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -41,6 +45,13 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $organizations = Organization::all();
+        $roles = Role::all();
+        return view('auth.register', compact('organizations', 'roles'));
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,10 +60,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'organization_id' => ['required'],
+            'role_id' => ['required'],
         ]);
     }
 
@@ -64,10 +78,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $role_organization = new EmployeeRoleOrganization();
+        $role_organization->user_id = $user->id;
+        $role_organization->role_id = $data['role_id'];
+        $role_organization->organization_id = $data['organization_id'];
+        $role_organization->save();
+
+        return $user;
     }
 }

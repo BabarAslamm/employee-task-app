@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Whoops\Run;
+use Database\Seeders\OrganizationsTableSeeder;
+use Database\Seeders\RolesTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(OrganizationsTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
     }
 }
