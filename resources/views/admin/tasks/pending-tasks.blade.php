@@ -27,7 +27,6 @@
                 <th scope="col">Description</th>
                 <th scope="col">Status</th>
                 <th scope="col">Time Spended</th>
-                <th scope="col" width="25%">Action</th>
               </tr>
             </thead>
             <tbody class="text-center">
@@ -73,8 +72,7 @@ $(document).ready(function () {
             { "data": "title"  , orderable: false},
             { "data": "description" , orderable: false },
             { "data": "status" , orderable: false },
-            { "data": "time-supended" , orderable: false },
-            { "data": "action" , orderable: false, searchable: false }
+            { "data": "time-supended" , orderable: false }
         ]
 
     });

@@ -15,6 +15,10 @@ class OrganizationsTableSeeder extends Seeder
      */
     public function run()
     {
+        Organization::truncate(); // Clear existing records before seeding
+        Task::truncate(); // Clear existing records before seeding
+
+
         $organizations = [
             'Organization 1', 'Organization 2', 'Organization 3',
             'Organization 4', 'Organization 5', 'Organization 6',
@@ -48,10 +52,6 @@ class OrganizationsTableSeeder extends Seeder
         ];
 
 
-            // echo '<pre>'; print_r();
-
-
-
 
 
 
@@ -63,15 +63,14 @@ class OrganizationsTableSeeder extends Seeder
 
             foreach($tasks as $task)
             {
-                // echo '<pre>'; print_r($task['title']. ' '. $organization->name);
-                // echo '<pre>'; print_r($task['description']); exit;
-                // echo '<pre>'; print_r($task->title); exit;
                 $organization_task =  new Task();
                 $organization_task->organization_id = $organization->id;
                 $organization_task->title = $task['title']. ' '. $organization->name;
                 $organization_task->description = $task['description'];
                 $organization_task->save();
             }
+
+
 
 
 

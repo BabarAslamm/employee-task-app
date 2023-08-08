@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,6 +16,7 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
 
+        Role::truncate(); // Clear existing records before seeding
 
         $roles = [
             [

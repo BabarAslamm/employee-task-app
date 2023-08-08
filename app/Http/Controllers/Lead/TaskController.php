@@ -163,8 +163,7 @@ class TaskController extends Controller
             2 =>'title',
             3 =>'description',
             4 =>'status',
-            5 =>'time-supended',
-            6 =>'action',
+            5 =>'time-supended'
 
 
         );
@@ -260,11 +259,6 @@ class TaskController extends Controller
                     $nestedData['description'] = substr($task->description, 0, 30) . '...';
                     $nestedData['status'] = $task->status;
                     $nestedData['time-supended'] = $time_spended;
-                    $nestedData['action'] = '
-
-                    <td class="button-action">
-
-                    </td>';
 
                     $data[] = $nestedData;
 
@@ -421,7 +415,9 @@ class TaskController extends Controller
         $task = Task::where('id', $id)->first();
 
         $user =  Auth::user();
-        $organization = User::with('employeeRoleOrganization.organization')->find($user->id);
+       
+        $user = User::with('employeeRoleOrganization.organization')->find($user->id);
+        $organization = $user->employeeRoleOrganization->organization;
 
         $users = Organization::with('employeeWithTeamMemberRole')->find($organization->id);
         $users = $users->employeeWithTeamMemberRole;
@@ -451,64 +447,6 @@ class TaskController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
