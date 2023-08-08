@@ -15,14 +15,11 @@ class CreateEmployeeRoleOrganizationsTable extends Migration
     {
         Schema::create('employee_role_organizations', function (Blueprint $table) {
             $table->id();
+            
             $table->unsignedBigInteger('user_id')->nullable();
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-
             $table->unsignedBigInteger('role_id')->nullable();
-            // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
-
             $table->unsignedBigInteger('organization_id')->nullable();
-            // $table->foreign('organization_id')->references('id')->on('organizations')->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }
